@@ -29,8 +29,6 @@ cimport numpy as cnp
 from numpy cimport npy_intp, NPY_WRITEABLE, NPY_C_CONTIGUOUS, NPY_OWNDATA
 cnp._import_array()
 
-import numpy as np
-
 from cpython.buffer cimport (
     PyObject_GetBuffer, PyBuffer_ToContiguous, PyBuffer_Release, PyBUF_INDIRECT
 )
