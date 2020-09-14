@@ -31,7 +31,9 @@ cnp._import_array()
 
 import numpy as np
 
-from cpython.buffer cimport PyObject_GetBuffer, PyBuffer_ToContiguous, PyBuffer_Release, PyBUF_SIMPLE, PyBUF_INDIRECT
+from cpython.buffer cimport (
+    PyObject_GetBuffer, PyBuffer_ToContiguous, PyBuffer_Release, PyBUF_INDIRECT
+)
 from cpython.object cimport PyObject
 from cpython.ref cimport Py_INCREF, Py_XDECREF, Py_XINCREF
 
