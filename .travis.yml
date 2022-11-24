@@ -24,9 +24,9 @@ matrix:
     # needed to work around https://github.com/travis-ci/travis-ci/issues/4794
     # TODO: We should see if we can replace this with installing python via pyenv # based on toxenv
     # Test on ppc64le
-    - python: 3.7
+    - python: 3.8
       env:
-      - TOXENV=py37-test-deps
+      - TOXENV=py38-test-deps
       # NumPy 1.21.5 fails to compile: https://github.com/numpy/numpy/issues/20761
       - TOX_OPTS="--force-dep numpy!=1.21.5"
       - HDF5_VERSION=1.10.5
