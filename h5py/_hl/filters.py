@@ -244,10 +244,15 @@ def fill_dcpl(plist, shape, dtype, chunks, compression, compression_opts,
     external = _normalize_external(external)
     # End argument validation
 
-    if (chunks is True) or \
-    (chunks is None and any((shuffle, fletcher32, compression, maxshape,
-                             scaleoffset is not None))):
-        chunks = guess_chunk(shape, maxshape, dtype.itemsize)
+    if chunks is None and any((
+        shuffle, fletcher32, compression, maxshape, scaleoffset is not None
+    )):
+        chunks = True
+
+    pre_chunked = plist.get_layout() == h5d.CHUNKED and plist.get_chunk() != ()
+    if chunks is True:
+        # Guess chunk shape unless a passed-in property list already has chunks
+        chunks = None if pre_chunked else guess_chunk(shape, maxshape, dtype.itemsize)
 
     if maxshape is True:
         maxshape = (None,)*len(shape)
