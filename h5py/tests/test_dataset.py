@@ -1951,3 +1951,14 @@ class TestVirtualPrefix(BaseDataset):
         self.assertEqual(virtual_prefix, virtual_prefix_readback)
         self.assertIsInstance(dset, Dataset)
         self.assertEqual(dset.shape, (10, 3))
+
+
+def test_filter_properties(writable_file):
+    ds = writable_file.create_dataset(
+        'foo', shape=1000, dtype=np.float32,
+        fletcher32=True, shuffle=True, compression='lzf'
+    )
+    assert ds.filter_ids == (
+        h5py.h5z.FILTER_SHUFFLE, h5py.h5z.FILTER_LZF, h5py.h5z.FILTER_FLETCHER32
+    )
+    assert ds.filter_names == ('shuffle', 'lzf', 'fletcher32')
