@@ -949,6 +949,7 @@ class TestCreateLike(BaseDataset):
         self.assertEqual(similar.shape, (10,))
         self.assertEqual(similar.maxshape, (20,))
 
+    @ut.skipIf('gzip' not in h5py.filters.encode, "DEFLATE is not installed")
     def test_chunking_compression(self):
         foo = self.f.create_dataset(
             'foo', dtype=np.uint16, shape=(100,), chunks=(21,), compression='gzip'
@@ -958,6 +959,7 @@ class TestCreateLike(BaseDataset):
         self.assertEqual(bar.chunks, (21,))
         self.assertEqual(bar.filter_ids, (h5py.h5z.FILTER_DEFLATE,))
 
+    @ut.skipIf('gzip' not in h5py.filters.encode, "DEFLATE is not installed")
     def test_remove_compression(self):
         foo = self.f.create_dataset(
             'foo', dtype=np.uint16, shape=(100,), chunks=(21,), compression='gzip'
@@ -966,6 +968,8 @@ class TestCreateLike(BaseDataset):
         self.assertEqual(baz.filter_ids, ())
         self.assertEqual(baz.chunks, (21,))
 
+    @ut.skipIf('gzip' not in h5py.filters.encode, "DEFLATE is not installed")
+    @ut.skipIf('lzf' not in h5py.filters.encode, "LZF is not installed")
     def test_replace_compression(self):
         foo = self.f.create_dataset(
             'foo', dtype=np.uint16, shape=(100,), chunks=(21,), compression='gzip',
