@@ -54,8 +54,8 @@ else
         fi
 
         pushd /tmp
-        #                                   Remove trailing .*, to get e.g. '1.12' ↓
-        curl -fsSLO "https://www.hdfgroup.org/ftp/HDF5/releases/hdf5-$MAJOR_V.$MINOR_V/hdf5-$HDF5_VERSION/src/hdf5-$HDF5_VERSION.tar.gz"
+        curl -fsSLO --max-time 550 --connect-timeout 30 \
+            "https://www.hdfgroup.org/ftp/HDF5/releases/hdf5-$MAJOR_V.$MINOR_V/hdf5-$HDF5_VERSION/src/hdf5-$HDF5_VERSION.tar.gz"
         tar -xzvf hdf5-$HDF5_VERSION.tar.gz
         pushd hdf5-$HDF5_VERSION
 
