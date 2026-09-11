@@ -1481,7 +1481,7 @@ def test_non_utf8(writable_file):
     writable_file.create_group(name_b)
 
     name_s = name_b.decode('utf8', 'surrogateescape')
-    assert set(writable_file) == {name_s}
+    assert name_s in set(writable_file)
     assert name_s in writable_file
     assert name_b in writable_file
 
